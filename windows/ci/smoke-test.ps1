@@ -40,7 +40,10 @@ try {
 
     $syncNames = (& "$PgRoot/bin/psql.exe" -h 127.0.0.1 -p $PgPort -U postgres -d postgres -X -t -A -v ON_ERROR_STOP=1 `
         -c "SELECT setting FROM pg_settings WHERE name = 'pg_failover_slots.synchronize_slot_names'").Trim()
-    if ($LASTEXITCODE -ne 0 -or $syncNames -ne 'name_like:%') { throw "Unexpected synchronize_slot_names default: $syncNames" }
+    # Pinned source boot value is the literal string 'name_like:%%' (the
+    # README's 'name_like:%' is documentation shorthand; the C literal is
+    # "name_like:%%" and the GUC reports it verbatim).
+    if ($LASTEXITCODE -ne 0 -or $syncNames -ne 'name_like:%%') { throw "Unexpected synchronize_slot_names default: $syncNames" }
 
     & "$PgRoot/bin/psql.exe" -h 127.0.0.1 -p $PgPort -U postgres -d postgres -X -v ON_ERROR_STOP=1 `
         -c 'SET statement_timeout = 30000' `
