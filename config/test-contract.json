@@ -1,0 +1,39 @@
+{
+  "contractVersion": 2,
+  "extension": "pg_failover_slots",
+  "smokeTest": {
+    "script": "windows/ci/smoke-test.ps1"
+  },
+  "runtimeRequirements": {
+    "extensionCreation": "not-required",
+    "preload": "shared",
+    "backgroundWorker": true,
+    "clientExecutable": {
+      "required": false,
+      "packagePaths": []
+    }
+  },
+  "testSetup": {
+    "preload": "shared",
+    "backgroundWorker": true,
+    "settings": []
+  },
+  "coverage": {
+    "createExtension": "not-applicable",
+    "backgroundWorker": "covered",
+    "clientExecutable": "not-applicable",
+    "serverLogAssertions": "covered",
+    "upgrade": "not-covered"
+  },
+  "functionalScenarios": [
+    {
+      "id": "preload-library-start-worker",
+      "description": "Starts PostgreSQL with shared preload, confirms the pg_failover_slots worker starts, the pg_failover_slots.version GUC is visible, and the server log records the worker start. No CREATE EXTENSION: this is a shared-preload library with no SQL extension.",
+      "evidence": [
+        "sql-result",
+        "server-log",
+        "background-worker-side-effect"
+      ]
+    }
+  ]
+}

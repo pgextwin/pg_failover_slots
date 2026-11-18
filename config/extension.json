@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "name": "pg_failover_slots",
+  "upstream": {
+    "repository": "EnterpriseDB/pg_failover_slots",
+    "ref": "v1.2.1",
+    "version": "1.2.1",
+    "commit": "27b1ef236ddd8488be6707196517fb4f9aa90140"
+  },
+  "postgresql": {
+    "majors": [
+      15,
+      16,
+      17,
+      18
+    ]
+  },
+  "windows": {
+    "architecture": "x64"
+  },
+  "license": {
+    "verifyAgainstUpstream": true,
+    "upstreamPath": "LICENSE"
+  }
+}
