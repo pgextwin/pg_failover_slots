@@ -9,7 +9,10 @@
   },
   "postgresql": {
     "majors": [
-      15
+      15,
+      16,
+      17,
+      18
     ]
   },
   "windows": {
